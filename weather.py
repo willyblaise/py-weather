@@ -2,18 +2,19 @@ import requests
 import json
 
 class Weather:
-    def __init__(self, api_key, unit = "metric"):
+    def __init__(self, api_key, unit):
         self.api_key = api_key
         self.base_url = "http://api.openweathermap.org/data/2.5/weather?"
         self.unit = unit
 
     def getWeather(self, city_name):
-        
+
         complete_url = f'{self.base_url}appid={self.api_key}&q={city_name}&units={self.unit}'
         response = requests.get(complete_url)
         data = response.json()
         if data["cod"] != "404":
- 
+
+            name = data["name"]
             main_info = data["main"]
             description = data["weather"]
             wind_info = data["wind"]
@@ -25,12 +26,13 @@ class Weather:
             wind_direction = wind_info["deg"]
 
 
-            
-        
+
+
             weather_description = description[0]["description"]
 
             info = {
-                "temprature": current_temperature,
+                "name": name,
+                "temperature": current_temperature,
                 "pressure": current_pressure,
                 "humidity": current_humidity,
                 "description": weather_description,
