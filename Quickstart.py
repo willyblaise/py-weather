@@ -1,12 +1,14 @@
 # Import from the file
 from weather import Weather
+import sys
 
+api_key = sys.argv[1]
 city_name = input("What city's weather would you like? ")
 print("What unit of measure for the weather?")
 unit = input("> ")
 
 # Create an instance of weather object
-instance = Weather(your_api_key, unit)
+instance = Weather(api_key, unit)
 
 # Make a dictionary filled with information about the city by this method
 data = instance.getWeather(city_name)
@@ -15,8 +17,10 @@ data = instance.getWeather(city_name)
 name = f'City Name: {data["name"]}'
 if unit == "metric":
     notation = "C"
-else:
+elif unit == "imperial":
     notation = "F"
+else:
+    notation = ""
 temperature = f'Temperature: {round(data["temperature"])}°{notation}'
 pressure = f'Pressure: {round(data["pressure"])} Pascal'
 humidity = f'Humidity: {data["humidity"]} g.m-3'
