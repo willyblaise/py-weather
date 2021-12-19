@@ -5,7 +5,20 @@ import sys
 api_key = sys.argv[1]
 city_name = input("What city's weather would you like? ")
 print("What unit of measure for the weather?")
-unit = input("> ")
+
+options = """
+ 1. Metric
+ 2. Imperial
+"""
+print(options)
+unit = int(input("> "))
+
+if unit == 1:
+    unit = "metric"
+elif unit == 2:
+    unit = "imperial"
+else:
+    pass
 
 # Create an instance of weather object
 instance = Weather(api_key, unit)
